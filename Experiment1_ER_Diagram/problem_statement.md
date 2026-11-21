@@ -23,121 +23,52 @@ FlexiFit Gym wants a database to manage its members, trainers, and fitness progr
 
 ### ER Diagram:
 *Paste or attach your diagram here*  
-![ER Diagram](er_diagram_fitness.png)
+<img width="1885" height="862" alt="Screenshot 2026-11-21 123320" src="https://github.com/user-attachments/assets/5ed7a3ac-e872-4df5-a245-938f25d24e6b" />
+
 
 ### Entities and Attributes
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+Entities and Attributes
+Entity	Attributes (PK, FK)	Notes
+Member	MemberID (PK), Name, PhoneNumber, Email, MembershipType, StartDate	Stores member details
+Trainer	TrainerID (PK), Name, ContactDetails, Specialization, Experience	Stores trainer details
+Program	ProgramID (PK), ProgramName, Description, Duration, Fee	Stores fitness program information
+MemberProgram	MemberProgramID (PK), MemberID (FK), ProgramID (FK), JoinDate	Stores member program registrations
+ProgramTrainer	ProgramTrainerID (PK), ProgramID (FK), TrainerID (FK)	Stores trainer assignments to programs
+TrainingSession	SessionID (PK), MemberID (FK), TrainerID (FK), SessionDate, StartTime, EndTime	Stores personal training session details
+Attendance	AttendanceID (PK), SessionID (FK), AttendanceStatus, AttendanceDate	Records member attendance for sessions
+Payment	PaymentID (PK), MemberID (FK), SessionID (FK), Amount, PaymentDate, PaymentType, PaymentStatus	Tracks membership and training session payments
 
-### Relationships and Constraints
+Relationships and Constraints
+Relationship	Cardinality	Participation	Notes
+Member - Program (Joins)	Many-to-Many	Member: Partial; Program: Partial	A member can join multiple programs
+Program - Trainer (Assigned To)	Many-to-Many	Program: Total; Trainer: Partial	A program may have multiple trainers
+Member - MemberProgram (Registers)	One-to-Many	Member: Partial; MemberProgram: Total	A member can register for multiple programs
+Program - MemberProgram (Includes)	One-to-Many	Program: Partial; MemberProgram: Total	Each registration belongs to one program
+Program - ProgramTrainer (Assigns)	One-to-Many	Program: Total; ProgramTrainer: Total	A program can have multiple trainers
+Trainer - ProgramTrainer (Assigned)	One-to-Many	Trainer: Partial; ProgramTrainer: Total	A trainer can handle multiple programs
+Member - TrainingSession (Books)	One-to-Many	Member: Partial; TrainingSession: Total	A member can book multiple sessions
+Trainer - TrainingSession (Conducts)	One-to-Many	Trainer: Partial; TrainingSession: Total	A trainer conducts multiple sessions
+TrainingSession - Attendance (Records)	One-to-One	TrainingSession: Total; Attendance: Total	Attendance is recorded for each session
+Member - Payment (Makes)	One-to-Many	Member: Partial; Payment: Total	A member can make multiple payments
+TrainingSession - Payment (Generates)	One-to-Many	TrainingSession: Partial; Payment: Partial	Payments can be linked to training sessions
 
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+Assumptions
+- Each entity has a unique primary key.
+- Foreign keys connect related entities.
+- Each member has a membership type and start date.
+- A member can join multiple fitness programs.
+- A program can have multiple trainers.
+- A trainer can handle multiple fitness programs.
+- Members can book personal training sessions with trainers.
+- Each training session is conducted by one trainer.
+- Attendance is recorded for every training session.
+- Members can make payments for memberships and training sessions.
+- Payment status indicates whether the payment is paid or pending.
+- Payment type identifies membership payment or session payment.
+- Each session has a unique session ID.
+- A member can attend multiple training sessions.
 
-### Assumptions
-- 
-- 
-- 
 
----
 
-# Scenario B: City Library Event & Book Lending System
 
-**Business Context:**  
-The Central Library wants to manage book lending and cultural events.
-
-**Requirements:**  
-- Members borrow books, with loan and return dates tracked.  
-- Each book has title, author, and category.  
-- Library organizes events; members can register.  
-- Each event has one or more speakers/authors.  
-- Rooms are booked for events and study.  
-- Overdue fines apply for late returns.
-
-### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_library.png)
-
-### Entities and Attributes
-
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-
-### Relationships and Constraints
-
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
-
-### Assumptions
-- 
-- 
-- 
-
----
-
-# Scenario C: Restaurant Table Reservation & Ordering
-
-**Business Context:**  
-A popular restaurant wants to manage reservations, orders, and billing.
-
-**Requirements:**  
-- Customers can reserve tables or walk in.  
-- Each reservation includes date, time, and number of guests.  
-- Customers place food orders linked to reservations.  
-- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).  
-- Bills generated per reservation, including food and service charges.  
-- Waiters assigned to serve reservations.
-
-### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
-
-### Entities and Attributes
-
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-
-### Relationships and Constraints
-
-| Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
-
-### Assumptions
-- 
-- 
-- 
-
----
-
-## Instructions for Students
-
-1. Complete **all three scenarios** (A, B, C).  
-2. Identify entities, relationships, and attributes for each.  
-3. Draw ER diagrams using **draw.io / diagrams.net** or hand-drawn & scanned.  
-4. Fill in all tables and assumptions for each scenario.  
-5. Export the completed Markdown (with diagrams) as **a single PDF**
