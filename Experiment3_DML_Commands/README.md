@@ -47,328 +47,333 @@ SELECT column1, column2 FROM table_name WHERE condition;
 ```
 **Question 1**
 --
-How many appointments are scheduled for each doctor?
+Write a SQL statement to Change the supplier name to 'A1 Suppliers' where the supplier ID is 8 in the suppliers table.
 
-Sample table:Appointments Table
+Table info
 
-
+suppliers(supplier_id,supplier_name,contact_person,phone_number,email,address)
 
 For example:
 
-Result
-DoctorID    TotalAppointments
-----------  -----------------
-3           3
-4           2
-6           1
-7           3
-10          1
-
+Test	Result
+select changes();
+changes()
+----------
+1
 
 ```sql
-SELECT DoctorID, COUNT(*) AS TotalAppointments
-FROM Appointments
-GROUP BY DoctorID
-ORDER BY DoctorID;
+update suppliers
+set supplier_name='A1 Suppliers'
+where supplier_id like '%8%';
 ```
 
 **Output:**
-<img width="755" height="547" alt="Screenshot 2026-11-27 204542" src="https://github.com/user-attachments/assets/da864a57-1810-408b-bb17-e48275d34aef" />
+<img width="1262" height="182" alt="Screenshot 2026-11-27 210304" src="https://github.com/user-attachments/assets/5f7dc95f-51c5-4ef7-adb5-a3a64667a23d" />
 
 
 **Question 2**
 ---
-What is the total number of medications prescribed for each patient?
+Write a SQL statement to update the product_name as 'Grapefruit' whose product_id is 4 in the products table.
 
-Sample tablePrescriptions Table
+products table
 
-
-
-For example:
-
-Result
-PatientID   TotalMedications
-----------  ----------------
-1           1
-2           1
-3           1
-4           1
-5           1
-6           1
-7           1
-8           1
-9           1
-10          1
+---------------
+product_id
+product_name
+category_id
+availability
 
 
 ```sql
-select PatientID, COUNT(Medication) as TotalMedications
-from Prescriptions
-group by PatientID;
+UPDATE products
+SET product_name = 'Grapefruit'
+WHERE product_id = 4
 ```
 
 **Output:**
+<img width="1085" height="216" alt="Screenshot 2026-11-27 210351" src="https://github.com/user-attachments/assets/06957910-0794-4ddd-aa48-b4c9c033ed37" />
 
-<img width="757" height="648" alt="Screenshot 2026-11-27 204629" src="https://github.com/user-attachments/assets/3d7147d0-d052-4de6-a23f-76a182ce3d88" />
 
 **Question 3**
 ---
-How many patients are there in each city?
+Write a SQL statement to Update the product_name to 'Premium Bread' whose product ID is 5 in the products table.
 
-Sample table: Patients Table
+Products table
 
-
-
-For example:
-
-Result
-Address     TotalPatients
-----------  -------------
-Berlin      3
-Chicago     4
-Mexico      3
+---------------
+product_id
+product_name
+category
+cost_price
+sell_price
+reorder_lvl
+quantity
+supplier_id
 
 
 ```sql
-select Address , count(*) as TotalPatients
-from Patients
-group by Address;
+UPDATE Products 
+set product_name = 'Premium Bread'
+where product_id = 5;
 ```
 
 **Output:**
 
-<img width="697" height="376" alt="Screenshot 2026-11-27 204717" src="https://github.com/user-attachments/assets/da69cda4-190c-4277-b624-388ac2f1d7d8" />
+<img width="1258" height="225" alt="Screenshot 2026-11-27 210455" src="https://github.com/user-attachments/assets/d42aa699-510b-46bf-a75b-ba3054ef9039" />
+
 
 
 **Question 4**
 ---
-Write a SQL query to find how many employees have an income greater than 50K?
+Write a SQL statement to double the availability of the product with product_id 1.
 
-Table: employee
+products table
 
-name        type
-----------  ----------
-id          INTEGER
-name        TEXT
-age         INTEGER
-city        TEXT
-income      INTEGER
-For example:
-
-Result
-employees_count
 ---------------
-8
-
+product_id
+product_name
+category_id
+availability
 
 ```sql
-SELECT COUNT(*) AS employees_count
-FROM employee
-WHERE income>50000;
+UPDATE products
+SET availability = availability * 2
+WHERE product_id = 1;
 ```
 
 **Output:**
-<img width="656" height="298" alt="Screenshot 2026-11-27 204800" src="https://github.com/user-attachments/assets/bf9220a6-a6e4-43b1-8f99-9d0b5856045d" />
+<img width="1097" height="212" alt="Screenshot 2026-11-27 210538" src="https://github.com/user-attachments/assets/8c8d3e22-4897-45d2-92e4-c7b85a304116" />
 
 
 **Question 5**
 ---
-Write a SQL query to find the customer with longest name?
+Write a SQL statement to change salary of employee to 8000 whose Employee ID is 105, if the existing salary is less than 5000.
 
-Table: customer
+Employees table
 
-name        type
-----------  ----------
-id          INTEGER
-name        TEXT
-city        TEXT
-email       TEXT
-phone       INTEGER
+---------------
+employee_id
+first_name
+last_name
+email
+phone_number
+hire_date
+job_id
+salary
+commission_pct
+manager_id
+department_id
 For example:
 
-Result
-name          length
-------------  ----------
-Preeti Patel  12
+Test	Result
+SELECT EMPLOYEE_ID, FIRST_NAME, SALARY, PHONE_NUMBER FROM EMPLOYEES WHERE EMPLOYEE_ID=105;
+EMPLOYEE_ID  FIRST_NAME  SALARY      PHONE_NUMBER
+-----------  ----------  ----------  ------------
+105          David       8000        590.423.4569
+
 
 
 ```sql
-SELECT name, LENGTH(name) AS length
-FROM customer
-ORDER BY length DESC
-LIMIT 1;
+UPDATE Employees
+SET salary = 8000
+WHERE employee_id = 105
+  AND salary < 5000;
 ```
 
 **Output:**
-
-<img width="682" height="290" alt="Screenshot 2026-11-27 204846" src="https://github.com/user-attachments/assets/66bdfd62-713d-4e02-86fd-49dea7b2bc3c" />
+<img width="1332" height="188" alt="Screenshot 2026-11-27 210627" src="https://github.com/user-attachments/assets/220b9a69-b02d-4f19-9ecc-eee71d1972ad" />
 
 
 **Question 6**
 ---
-Write a SQL query to calculate the average purchase amount of all orders. Return average purchase amount.
 
-Sample table: orders
+Write a SQL query to Delete All Doctors whose ID ranges from 2 to 4.
 
-ord_no      purch_amt   ord_date    customer_id  salesman_id
+Sample table: Doctors
 
-----------  ----------  ----------  -----------  -----------
-
-70001       150.5       2012-10-05  3005         5002
-
-70009       270.65      2012-09-10  3001         5005
-
-70002       65.26       2012-10-05  3002         5001
-
- 
-
+attributes : doctor_id, first_name, last_name, specialization
 For example:
 
-Result
-AVERAGE
-----------
-1461.765
+Test	Result
+SELECT * FROM doctors;
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
+2           Emily       Johnson     Orthopedics
+3           Michael     Brown       Pediatrics
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
 
 
 ```sql
-select avg(purch_amt) as AVERAGE from orders
+delete from Doctors
+where doctor_id between 2 and 4;
 ```
 
 **Output:**
+<img width="912" height="596" alt="Screenshot 2026-11-27 210715" src="https://github.com/user-attachments/assets/788a80e8-10a8-4b92-b1fc-e940d1784a84" />
 
-<img width="456" height="288" alt="Screenshot 2026-11-27 204934" src="https://github.com/user-attachments/assets/93432cd4-741d-4ebd-83fb-89449eea1820" />
 
 
 **Question 7**
 ---
-Write a SQL query to find the maximum purchase amount.
+Write a SQL query to Delete customers with 'GRADE' 3 or 'AGENT_CODE' 'A008' whose 'OUTSTANDING_AMT' is less than 5000
 
-Sample table: orders
+Sample table: Customer
 
-ord_no      purch_amt   ord_date    customer_id  salesman_id
-
-----------  ----------  ----------  -----------  -----------
-
-70001       150.5       2012-10-05  3005         5002
-
-70009       270.65      2012-09-10  3001         5005
-
-70002       65.26       2012-10-05  3002         5001
-
- 
-
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
+|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
+| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
+| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
+| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSBB      | A008       |
 For example:
 
-Result
-MAXIMUM
+Test	Result
+select changes();
+changes()
 ----------
-5760.0
+1
 
 
 ```sql
-SELECT MAX(purch_amt) as MAXIMUM
-FROM orders;
+DELETE FROM Customer
+where( GRADE=3
+OR AGENT_CODE='A008')
+AND OUTSTANDING_AMT < 5000;
 
 ```
 
 **Output:**
-<img width="457" height="292" alt="Screenshot 2026-11-27 205016" src="https://github.com/user-attachments/assets/c7196cf9-3ddc-41c2-b976-3b89a0369aeb" />
+<img width="1120" height="150" alt="Screenshot 2026-11-27 210759" src="https://github.com/user-attachments/assets/718bb473-75e2-4ce5-9e05-3bce752c3e27" />
+
 
 
 **Question 8**
 ---
-Write the SQL query that accomplishes the grouping of data by joining date (jdate), calculates the total work hours for each date, and excludes dates where the total work hour sum is not greater than 40.
 
-Sample table: employee1
+Write a SQL query to Delete All Doctors with a NULL Specialization
 
+Sample table: Doctors
 
-
+attributes : doctor_id, first_name, last_name, specialization
 For example:
 
-Result
-jdate       SUM(workhour)
-----------  -------------
-2004.0      46
-2006.0      46
+Test	Result
+SELECT * FROM doctors;
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
+2           Emily       Johnson     Orthopedics
+3           Michael     Brown       Pediatrics
+4           Febin       Jones
+doctor_id   first_name  last_name   specialization
+----------  ----------  ----------  --------------
+1           John        Smith       Cardiology
+2           Emily       Johnson     Orthopedics
+3           Michael     Brown       Pediatrics
 
 
 ```sql
-SELECT jdate, SUM(workhour)
-FROM employee1
-GROUP BY jdate
-HAVING SUM(workhour) > 40;
+
+DELETE FROM doctors
+WHERE specialization IS NULL;
 ```
 
 **Output:**
+<img width="948" height="730" alt="Screenshot 2026-11-27 210855" src="https://github.com/user-attachments/assets/3c0e7e0c-ac39-4cb3-b944-3a6728fb4562" />
 
-<img width="986" height="351" alt="Screenshot 2026-11-27 205104" src="https://github.com/user-attachments/assets/288a66b2-b5ca-4c18-baa3-4a69dadde571" />
 
 
 **Question 9**
 ---
-Write the SQL query that achieves the grouping of data by age, calculates the minimum income for each age group, and includes only those age groups where the minimum income is less than 1,000,000.
+Write a SQL query to Delete customers with following conditions
 
-Sample table: employee
+'CUST_COUNTRY' is not in a list of specified countries ('UK', 'USA', 'Canada')
+'GRADE' is greater than or equal to 3
+Sample table: Customer
 
-
-
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
+|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
+| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
+| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
+| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSBB      | A008       |
 For example:
 
-Result
-age         Income
-----------  ----------
-32          200000
-40          350000
-45          450000
+Test	Result
+select changes();
+changes()
+----------
+2
+
 
 
 ```sql
-SELECT 
-    age,
-    MIN(Income) AS Income
-FROM 
-    employee
-GROUP BY 
-    age
-HAVING 
-    MIN(Income) < 1000000;
+DELETE FROM Customer
+WHERE CUST_COUNTRY NOT IN ('UK', 'USA', 'Canada')
+AND GRADE >= 3;
 ```
 
 **Output:**
-<img width="606" height="386" alt="Screenshot 2026-11-27 205145" src="https://github.com/user-attachments/assets/533561b9-1c4b-40fc-9f25-fb8b33ebe64e" />
+<img width="1382" height="197" alt="Screenshot 2026-11-27 210933" src="https://github.com/user-attachments/assets/2ba88926-c46c-444c-bbd6-9d217ecc7fea" />
 
 
 **Question 10**
 ---
-Write the SQL query that achieves the grouping of data by occupation, calculates the average work hours for each occupation, and includes only those occupations where the average work hour falls between 10 and 12.
 
-Sample table: employee1
+Write a SQL query to Delete customers from 'customer' table where 'AGENT_CODE' is either 'A003' or 'A008'.
 
+ 
+Sample table: Customer
 
-
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
+|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
++-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
+| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
+| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
+| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSBB      | A008       |
 For example:
 
-Result
-occupation  AVG(workhour)
-----------  -------------
-Business    10.0
-Engineer    12.0
-
+Test	Result
+select distinct(agent_code)from customer;
+AGENT_CODE
+----------
+A003
+A008
+A011
+A006
+A005
+A010
+A002
+A004
+A009
+A007
+A012
+A001
+AGENT_CODE
+----------
+A011
+A006
+A005
+A010
+A002
+A004
+A009
+A007
+A012
+A001
 
 ```sql
-SELECT 
-    occupation,
-    AVG(workhour) AS `AVG(workhour)`
-FROM 
-    employee1
-GROUP BY 
-    occupation
-HAVING 
-    AVG(workhour) BETWEEN 10 AND 12;
+
+DELETE FROM customer
+WHERE agent_code IN ('A003', 'A008');
 ```
 
 **Output:**
-<img width="1292" height="340" alt="Screenshot 2026-11-27 205235" src="https://github.com/user-attachments/assets/3040ec8d-0f99-4701-a4ab-702f0d7c5df4" />
+
+<img width="580" height="782" alt="Screenshot 2026-11-27 211013" src="https://github.com/user-attachments/assets/a377848e-489c-43fb-b4fc-0a5a8dc10c18" />
 
 
 ## RESULT
